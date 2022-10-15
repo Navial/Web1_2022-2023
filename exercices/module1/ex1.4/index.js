@@ -23,5 +23,4 @@ function changeState(){
         green.style.backgroundColor = "green";
         etat = 0;
     }
-
 }
