@@ -1,19 +1,29 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './stylesheets/main.css';
-import shutterImage from './img/shutter.jpg';
-import interstellarImage from './img/interstellar.jpg';
 
-const main = document.querySelector("main");
+const nbLines = document.querySelector("#nbLines");
+const nbColumns = document.querySelector("#nbColumns");
+const button = document.querySelector("#button");
+const table = document.querySelector("#table");
 
-main.innerHTML = `<p>here're my fav movies</p>`
+button.addEventListener("click", createTable);
 
-renderMovieImage(shutterImage);
-renderMovieImage(interstellarImage);
+table.innerHTML = createTable();
 
-function renderMovieImage(imageUrl){
-    const image = new Image();
-    image.src = imageUrl;
-    image.height = 500;
-    const images = document.querySelector('main');
-    images.appendChild(image);
+function createTable(){
+    let html = `
+    <table class="talbe">
+        <tbody>`;
+        for(let i=1; i<=nbLines.value; i+=1){
+            html += '<tr>'
+            for(let j=1; j<=nbColumns.value; j+=1){
+                html +=`<td>CELL[${i}][${j}]</td>` 
+            }
+            html += '</tr>'
+        }
+    html +=`</tbody>
+    </table>`
+    console.log(html);
+    return html;
 }
+

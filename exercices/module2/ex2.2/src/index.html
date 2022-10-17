@@ -5,17 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>myMovies</title>
   </head>
-  <body class="vh-100 d-flex flex-column">
-    <header>
-      <h1 class="text-center">We love movies</h1>
-    </header>
-    <main>
-    </main>
-    <footer class="text-white font-weight-bold py-2 text-center">
-      <h1 class="animate__animated animate__bounce animate__delay-2s">
-        But we also love JS
-      </h1>
-      <img height="50px" src="./img/film-solid.svg" alt="" />
-    </footer>
+  <body >
+    <form >
+
+      <div class="form-group">
+        <label >Number of lines</label>
+        <input type="number" class="form-control" id="nbLines" placeholder="Enter number of lines">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Number of columns</label>
+        <input type="number" class="form-control" id="nbColumns" placeholder="Enter number of columns">
+      </div>
+
+      <div class="btn btn-primary" id="button">Create table</div>
+    </form>
+    <div id="table"></div>
   </body>
 </html>
