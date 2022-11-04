@@ -2,8 +2,19 @@
 @baseUrl = http://localhost:3000
 GET {{baseUrl}}/movies
 
-# OLD ### Read all movies with minimum duration
-# GET {{baseUrl}}/movies/150
-
 ### Read all movies with minimum duration
 GET {{baseUrl}}/movies/?minimumduration=150
+
+### Read the movie with the matching id
+GET {{baseUrl}}/movies/1
+
+### Create a new movie
+POST {{baseUrl}}/movies
+Content-Type: application/json
+
+{
+    "title": "Django",
+    "duration": 215,
+    "budget": 150,
+    "link": "https://www.allocine.fr/film/fichefilm_gen_cfilm=190918.html"
+  }
