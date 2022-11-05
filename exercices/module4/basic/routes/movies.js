@@ -48,15 +48,13 @@ router.get('/:id', function (req, res) {
 
 router.post('/', function (req, res) {
   const title = req?.body?.title?.lenght !== 0 ? req.body.title : undefined;
-  //const duration = req?.body?.duration?.value > 0 ? req.body.duration : undefined;
-  //const budget = req?.body?.budget?.value > 0 ? req.body.budget : undefined;
-  const duration =req.body.duration;
-  const budget = req.body.budget;
+  const duration = req?.body?.duration > 0 ? req.body.duration : undefined;
+  const budget = req?.body?.budget > 0 ? req.body.budget : undefined;
   const link = req?.body?.link?.lenght !== 0 ? req.body.link : undefined;
 
-  if(!title || !duration || !budget || !link) return res.sendStatus(404);
+  if(!title || !duration || !budget || !link) return res.sendStatus(400);
   
-  const newId = MOVIES.length +2;
+  const newId = MOVIES.length +1;
 
   const newMovie =
   {
@@ -68,8 +66,42 @@ router.post('/', function (req, res) {
   }
   
   MOVIES.push(newMovie);
-
   res.json(newMovie);
+});
+
+router.delete('/:id', function (req, res) {
+  console.log(`DELETE /movies/${req.params.id}`);
+
+  const foundIndex = MOVIES.findIndex(m => m.id == req.params.id);
+
+  if(foundIndex < 0) return res.sendStatus(400);
+
+  const removedMovies = MOVIES.splice(foundIndex, 1);
+  const removedMovie = removedMovies[0];
+
+  res.json(removedMovie);
+
+});
+
+router.patch('/:id', function (req, res) {
+  console.log(`PATCH /movies/${req.params.id}`);
+
+  const title = req?.body?.title?.lenght !== 0 ? req.body.title : undefined;
+  const duration = req?.body?.duration > 0 ? req.body.duration : undefined;
+  const budget = req?.body?.budget > 0 ? req.body.budget : undefined;
+  const link = req?.body?.link?.lenght !== 0 ? req.body.link : undefined;
+
+  if(!title || !duration || !budget || !link) return res.sendStatus(400);
+
+  const foundIndex = MOVIES.findIndex(m => m.id == req.params.id);
+
+  if(foundIndex < 0) return res.sendStatus(400);
+
+  const updatedMovie = {...MOVIES[foundIndex], ...req.body};
+
+  MOVIES[foundIndex] = updatedMovie;
+
+  res.json(updatedMovie);
 
 });
 
